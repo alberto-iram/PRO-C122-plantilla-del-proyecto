@@ -21,20 +21,22 @@ while True:
 
     if results.multi_hand_landmarks:
         for hand_landmark in results.multi_hand_landmarks:
-            #accessing the landmarks by their position
+            # Acceder a las marcas de referencia por su posición
             lm_list=[]
             for id ,lm in enumerate(hand_landmark.landmark):
                 lm_list.append(lm)
 
-            #array to hold true or false if finger is folded    
+            # Matriz para almacenar "True" o "False" si el dedo está doblado
             finger_fold_status =[]
             for tip in finger_tips:
-                #getting the landmark tip position and drawing blue circle
+                # Obteniendo las marcas de referencia de las posición de las puntas y dibujando un círculo azul
                 x,y = int(lm_list[tip].x*w), int(lm_list[tip].y*h)
                 cv2.circle(img, (x,y), 15, (255, 0, 0), cv2.FILLED)
 
-                #writing condition to check if finger is folded i.e checking if finger tip starting value is smaller than finger starting position which is inner landmark. for index finger    
-                #if finger folded changing color to green
+                # Escribiendo una condición para verificar si el dedo está doblado, 
+                # es decir, si el valor inicial de la punta del dedo es menor que 
+                # la posición inicial del dedo, que es la marca de referencia interior.
+                # Para el índice del dedo, si el dedo está doblado, cambiar el color a verde
                 if lm_list[tip].x < lm_list[tip - 3].x:
                     cv2.circle(img, (x,y), 15, (0, 255, 0), cv2.FILLED)
                     finger_fold_status.append(True)
@@ -43,10 +45,10 @@ while True:
 
             print(finger_fold_status)
 
-             #checking if all fingers are folded
+             # Verificar si todos los dedos están doblados
             if all(finger_fold_status):
                 
-                # WRITE THE CODE HERE   
+                #  ESCRIBIR EL CÓDIGO AQUÍ
 
 
 
@@ -57,7 +59,7 @@ while True:
             mp_draw.DrawingSpec((0,255,0),4,2))
     
 
-    cv2.imshow("hand tracking", img)
+    cv2.imshow("Seguimiento de manos", img)
     cv2.waitKey(1)
 
 
