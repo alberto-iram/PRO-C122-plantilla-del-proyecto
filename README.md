@@ -1,1 +1,1 @@
-# PRO-C122-V1-plantilla-proyecto
+# PRO-C122-plantilla-proyecto
